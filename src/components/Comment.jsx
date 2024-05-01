@@ -26,7 +26,8 @@ const Comment = ({ url }) => {
       <input ref={inpBox} type='text' className='border border-black m-2 outline-none px-1' />
       <button
         onClick={() => {
-          commentAdder();
+          inpBox.current.value < 1 ? alert('comment box is empty') : commentAdder();
+          inpBox.current.value = '';
         }}
         className='bg-green-200 border border-green-200 px-2'
       >
@@ -55,6 +56,7 @@ const Comment = ({ url }) => {
                         className={`underline cursor-pointer ml-5 `}
                         onClick={() => {
                           setReplyButton(index);
+                          repBox.current.focus();
                         }}
                       >
                         reply
@@ -68,7 +70,10 @@ const Comment = ({ url }) => {
                       />
                       <button
                         onClick={() => {
-                          replyAdder(index);
+                          repBox.current.value < 1
+                            ? alert('reply box is empty')
+                            : replyAdder(index);
+
                           setReplyButton(-1);
                           repBox.current.value = '';
                         }}
